@@ -70,20 +70,68 @@ npm run dev
 QUARTZ AI uses Google Gemini 1.5 Flash via Vercel AI SDK for real-time analysis.
 
 1. Get your Google AI API key:
-   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Visit [Google AI Studio](https://aistudio.google.com/)
    - Create a new API key (free tier available)
 
-2. Create a `.env.local` file in the root directory:
+2. **For Local Development**: Create a `.env.local` file in the root directory:
 ```env
 GOOGLE_GENERATIVE_AI_API_KEY=your_api_key_here
 ```
 
-3. Install dependencies:
+3. **For Vercel Deployment**: Add the environment variable in Vercel dashboard:
+   - Go to your project settings → Environment Variables
+   - Add `GOOGLE_GENERATIVE_AI_API_KEY` with your API key value
+   - Make sure to add it for Production, Preview, and Development environments
+
+4. Install dependencies:
 ```bash
 npm install
 ```
 
 The application will automatically use Gemini to analyze URLs and code snippets.
+
+## Deployment
+
+### Deploy to Vercel
+
+QUARTZ AI is optimized for Vercel deployment:
+
+1. **Push to GitHub**: Make sure your code is in a GitHub repository
+
+2. **Import to Vercel**:
+   - Go to [Vercel](https://vercel.com)
+   - Click "New Project"
+   - Import your GitHub repository
+   - Vercel will automatically detect Next.js
+
+3. **Configure Environment Variables**:
+   - In the project settings, go to "Environment Variables"
+   - Add `GOOGLE_GENERATIVE_AI_API_KEY` with your API key
+   - Apply to all environments (Production, Preview, Development)
+
+4. **Deploy**:
+   - Click "Deploy"
+   - Vercel will build and deploy your application automatically
+   - Your app will be live at `your-project.vercel.app`
+
+### Build Commands
+
+Vercel will automatically use:
+- **Build Command**: `npm run build`
+- **Output Directory**: `.next`
+- **Install Command**: `npm install`
+
+### Environment Variables Required
+
+- `GOOGLE_GENERATIVE_AI_API_KEY` - Your Google Generative AI API key
+
+### Troubleshooting Deployment
+
+If you encounter issues:
+
+1. **Build Errors**: Check that all dependencies are in `package.json`
+2. **API Errors**: Verify `GOOGLE_GENERATIVE_AI_API_KEY` is set correctly in Vercel
+3. **Type Errors**: Ensure TypeScript compiles without errors locally (`npm run build`)
 
 ## Usage
 

@@ -1,6 +1,82 @@
 export type Language = 'es' | 'en'
 
-export const translations = {
+// Define the translation structure interface
+export interface Translations {
+  common: {
+    newAudit: string
+    tryAgain: string
+    copy: string
+    copied: string
+    download: string
+  }
+  hero: {
+    title: string
+    subtitle: string
+  }
+  auditInput: {
+    websiteTab: string
+    codeTab: string
+    websiteUrl: string
+    websitePlaceholder: string
+    websiteDescription: string
+    codeLabel: string
+    codePlaceholder: string
+    codeDescription: string
+    startAudit: string
+  }
+  processing: {
+    title: string
+    subtitle: string
+    progress: string
+    log: string
+    steps: {
+      analyzingHtml: string
+      checkingSecurity: string
+      evaluatingPerformance: string
+    }
+  }
+  report: {
+    title: string
+    subtitle: string
+    stats: {
+      passed: string
+      defects: string
+      critical: string
+      score: string
+      of100: string
+    }
+    charts: {
+      byPriority: string
+      generalHealth: string
+      passedTests: string
+      defectsByCategory: string
+    }
+    defects: {
+      title: string
+      defect: string
+      defects: string
+      noDefects: string
+      noPassedTests: string
+    }
+    testScript: string
+    priority: {
+      critical: string
+      medium: string
+      low: string
+    }
+  }
+  error: {
+    auditError: string
+    auditFailed: string
+  }
+  logs: {
+    analyzingSite: string
+    analyzingCode: string
+    characters: string
+  }
+}
+
+export const translations: Record<Language, Translations> = {
   es: {
     // Common
     common: {
@@ -163,9 +239,7 @@ export const translations = {
       characters: 'characters',
     },
   },
-} as const
-
-export type TranslationKey = keyof typeof translations.es
+}
 
 
 

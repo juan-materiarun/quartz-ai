@@ -1,12 +1,12 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { Language, translations } from './translations'
+import { Language, translations, type Translations } from './translations'
 
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: typeof translations.es
+  t: Translations
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
