@@ -1,0 +1,172 @@
+export type Language = 'es' | 'en'
+
+export const translations = {
+  es: {
+    // Common
+    common: {
+      newAudit: 'Nueva Auditoría',
+      tryAgain: 'Intentar de Nuevo',
+      copy: 'Copiar',
+      copied: 'Copiado',
+      download: 'Descargar',
+    },
+    // Hero Section
+    hero: {
+      title: 'QUARTZ AI',
+      subtitle: 'Automatización de Aseguramiento de Calidad de Nivel Bancario',
+    },
+    // Audit Input
+    auditInput: {
+      websiteTab: 'Sitio Web',
+      codeTab: 'Código',
+      websiteUrl: 'URL del Sitio Web',
+      websitePlaceholder: 'https://example.com',
+      websiteDescription: 'Ingresa una URL para análisis completo de seguridad y rendimiento',
+      codeLabel: 'Pega tu Código',
+      codePlaceholder: '<html>\n  <head>\n    <title>Mi App</title>\n  </head>\n  <body>\n    <!-- Tu código aquí -->\n  </body>\n</html>',
+      codeDescription: 'Pega HTML, CSS, JavaScript o cualquier código web para análisis instantáneo',
+      startAudit: 'Iniciar Auditoría',
+    },
+    // Processing State
+    processing: {
+      title: 'Escaneando Arquitectura...',
+      subtitle: 'Análisis en progreso',
+      progress: 'Progreso',
+      log: 'Registro',
+      steps: {
+        analyzingHtml: 'Analizando HTML...',
+        checkingSecurity: 'Verificando seguridad...',
+        evaluatingPerformance: 'Evaluando rendimiento...',
+      },
+    },
+    // Report Generator
+    report: {
+      title: 'Reporte de Auditoría',
+      subtitle: 'Análisis de Calidad de Nivel Bancario',
+      stats: {
+        passed: 'Exitosas',
+        defects: 'Defectos',
+        critical: 'Críticos',
+        score: 'Puntuación',
+        of100: 'de 100',
+      },
+      charts: {
+        byPriority: 'Por Prioridad',
+        generalHealth: 'Salud General',
+        passedTests: 'Pruebas Exitosas',
+        defectsByCategory: 'Defectos por Categoría',
+      },
+      defects: {
+        title: 'Defectos Encontrados',
+        defect: 'defecto',
+        defects: 'defectos',
+        noDefects: 'No se encontraron defectos',
+        noPassedTests: 'No hay pruebas exitosas',
+      },
+      testScript: 'Script de Pruebas',
+      priority: {
+        critical: 'Critical',
+        medium: 'Medium',
+        low: 'Low',
+      },
+    },
+    // Error Messages
+    error: {
+      auditError: 'Error en la Auditoría',
+      auditFailed: 'Algo salió mal durante el proceso de auditoría.',
+    },
+    // Log Messages (these come from the API, but we can translate the ones we generate)
+    logs: {
+      analyzingSite: 'Analizando sitio en vivo:',
+      analyzingCode: 'Analizando fragmento de código',
+      characters: 'caracteres',
+    },
+  },
+  en: {
+    // Common
+    common: {
+      newAudit: 'New Audit',
+      tryAgain: 'Try Again',
+      copy: 'Copy',
+      copied: 'Copied',
+      download: 'Download',
+    },
+    // Hero Section
+    hero: {
+      title: 'QUARTZ AI',
+      subtitle: 'Bank-Grade Quality Assurance Automation',
+    },
+    // Audit Input
+    auditInput: {
+      websiteTab: 'Website',
+      codeTab: 'Code',
+      websiteUrl: 'Website URL',
+      websitePlaceholder: 'https://example.com',
+      websiteDescription: 'Enter a URL for complete security and performance analysis',
+      codeLabel: 'Paste your Code',
+      codePlaceholder: '<html>\n  <head>\n    <title>My App</title>\n  </head>\n  <body>\n    <!-- Your code here -->\n  </body>\n</html>',
+      codeDescription: 'Paste HTML, CSS, JavaScript or any web code for instant analysis',
+      startAudit: 'Start Audit',
+    },
+    // Processing State
+    processing: {
+      title: 'Scanning Architecture...',
+      subtitle: 'Analysis in progress',
+      progress: 'Progress',
+      log: 'Log',
+      steps: {
+        analyzingHtml: 'Analyzing HTML...',
+        checkingSecurity: 'Checking security...',
+        evaluatingPerformance: 'Evaluating performance...',
+      },
+    },
+    // Report Generator
+    report: {
+      title: 'Audit Report',
+      subtitle: 'Bank-Grade Quality Analysis',
+      stats: {
+        passed: 'Passed',
+        defects: 'Defects',
+        critical: 'Critical',
+        score: 'Score',
+        of100: 'of 100',
+      },
+      charts: {
+        byPriority: 'By Priority',
+        generalHealth: 'General Health',
+        passedTests: 'Passed Tests',
+        defectsByCategory: 'Defects by Category',
+      },
+      defects: {
+        title: 'Defects Found',
+        defect: 'defect',
+        defects: 'defects',
+        noDefects: 'No defects found',
+        noPassedTests: 'No passed tests',
+      },
+      testScript: 'Test Script',
+      priority: {
+        critical: 'Critical',
+        medium: 'Medium',
+        low: 'Low',
+      },
+    },
+    // Error Messages
+    error: {
+      auditError: 'Audit Error',
+      auditFailed: 'Something went wrong during the audit process.',
+    },
+    // Log Messages
+    logs: {
+      analyzingSite: 'Analyzing live site:',
+      analyzingCode: 'Analyzing code snippet',
+      characters: 'characters',
+    },
+  },
+} as const
+
+export type TranslationKey = keyof typeof translations.es
+
+
+
+
