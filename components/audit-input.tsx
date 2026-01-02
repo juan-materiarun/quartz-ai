@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { Link, Code, ArrowRight, Globe, FileCode } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -36,11 +37,24 @@ export function AuditInput({ onUrlSubmit, onCodeSubmit }: AuditInputProps) {
   return (
     <div className="w-full max-w-3xl mx-auto space-y-6 px-4 sm:px-6 animate-in fade-in duration-300">
       {/* Centered Hero Section */}
-      <div className="text-center space-y-2 relative pt-12 sm:pt-0">
+      <div className="text-center space-y-3 relative pt-12 sm:pt-0">
         <div className="absolute top-0 right-0 flex items-center gap-2">
           <ThemeSelector />
           <LanguageSelector />
         </div>
+        
+        {/* Logo */}
+        <div className="flex justify-center mb-2">
+          <Image 
+            src="/logo.png" 
+            alt="QUARTZ AI" 
+            width={200}
+            height={80}
+            priority
+            className="h-16 sm:h-20 w-auto object-contain"
+          />
+        </div>
+        
         <h1 className="text-2xl sm:text-3xl font-semibold text-[#0f172a] dark:text-white px-2">{t.hero.title}</h1>
         <p className="text-sm sm:text-base text-[#475569] dark:text-[#94a3b8] px-2">
           {t.hero.subtitle}

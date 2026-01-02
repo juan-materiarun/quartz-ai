@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle2, XCircle, AlertTriangle, Download, Copy, ChevronDown, ChevronUp, FileText } from 'lucide-react'
@@ -120,9 +121,19 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
       {/* Header */}
       <div className="flex flex-col gap-4 py-4 border-b border-[#334155] dark:border-[#334155] border-[#cbd5e1] animate-slide-up-spring">
         <div className="flex items-center justify-between">
-          <div className="text-left flex-1">
-            <h1 className="text-xl sm:text-2xl font-semibold text-white dark:text-white text-[#0f172a]">{t.report.title}</h1>
-            <p className="text-sm sm:text-base text-[#94a3b8] dark:text-[#94a3b8] text-[#475569]">{t.report.subtitle}</p>
+          <div className="flex items-center gap-4 flex-1">
+            {/* Logo */}
+            <Image 
+              src="/logo.png" 
+              alt="QUARTZ AI" 
+              width={120}
+              height={48}
+              className="h-10 sm:h-12 w-auto object-contain hidden sm:block"
+            />
+            <div className="text-left">
+              <h1 className="text-xl sm:text-2xl font-semibold text-white dark:text-white text-[#0f172a]">{t.report.title}</h1>
+              <p className="text-sm sm:text-base text-[#94a3b8] dark:text-[#94a3b8] text-[#475569]">{t.report.subtitle}</p>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <ThemeSelector />

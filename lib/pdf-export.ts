@@ -18,17 +18,26 @@ export function exportToPDF(result: AuditResult, url: string = '') {
   // ========== HEADER CON MARCA ==========
   // Fondo degradado simulado con rectángulos
   doc.setFillColor(56, 189, 248); // #38bdf8
-  doc.rect(0, 0, pageWidth, 40, 'F');
+  doc.rect(0, 0, pageWidth, 45, 'F');
   
-  // Logo/Marca QUARTZ AI
+  // Intentar cargar el logo
+  try {
+    const logoImg = new Image();
+    logoImg.src = '/logo.png';
+    // Si el logo está disponible, añadirlo al PDF
+    doc.addImage(logoImg, 'PNG', pageWidth / 2 - 25, 8, 50, 20);
+  } catch (error) {
+    // Fallback: Logo/Marca QUARTZ AI en texto
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(24);
+    doc.setFont('helvetica', 'bold');
+    doc.text('QUARTZ AI', pageWidth / 2, 18, { align: 'center' });
+  }
+  
   doc.setTextColor(255, 255, 255);
-  doc.setFontSize(24);
-  doc.setFont('helvetica', 'bold');
-  doc.text('QUARTZ AI', pageWidth / 2, 18, { align: 'center' });
-  
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
-  doc.text('Bank-Grade Testing Automation', pageWidth / 2, 28, { align: 'center' });
+  doc.text('Bank-Grade Testing Automation', pageWidth / 2, 35, { align: 'center' });
   
   // Línea decorativa
   doc.setDrawColor(14, 165, 233); // #0ea5e9

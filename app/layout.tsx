@@ -14,6 +14,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "QUARTZ AI - Bank-Grade QA Automation",
   description: "Automated Bank-Grade Quality Assurance for Web Applications",
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export const viewport: Viewport = {
