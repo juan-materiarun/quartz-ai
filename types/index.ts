@@ -4,6 +4,7 @@ export interface AuditResult {
   passedTests: TestResult[]
   defects: Defect[]
   testScript: string
+  error?: string
 }
 
 export interface TestResult {
