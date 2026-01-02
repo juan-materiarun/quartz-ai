@@ -68,6 +68,16 @@ export interface Translations {
   error: {
     auditError: string
     auditFailed: string
+    websiteNotAccessible: string
+    websiteNotFound: string
+    tryDifferentSite: string
+    possibleReasons: string
+    reasons: {
+      blocked: string
+      noInternet: string
+      invalidUrl: string
+      siteDown: string
+    }
   }
   logs: {
     analyzingSite: string
@@ -148,8 +158,18 @@ export const translations: Record<Language, Translations> = {
     },
     // Error Messages
     error: {
-      auditError: 'Error en la Auditoría',
+      auditError: 'No pudimos acceder a esta web',
       auditFailed: 'Algo salió mal durante el proceso de auditoría.',
+      websiteNotAccessible: 'La web no está disponible o no pudimos acceder a ella',
+      websiteNotFound: 'Parece que esta web no existe o no permite el acceso automático',
+      tryDifferentSite: 'Podés intentar con otro sitio o verificar que la URL sea correcta',
+      possibleReasons: 'Posibles razones:',
+      reasons: {
+        blocked: 'La web bloquea accesos automáticos (común en Facebook, LinkedIn)',
+        noInternet: 'La web no está disponible en este momento',
+        invalidUrl: 'La URL no es válida o tiene errores de escritura',
+        siteDown: 'El servidor está caído o en mantenimiento',
+      },
     },
     // Log Messages (these come from the API, but we can translate the ones we generate)
     logs: {
@@ -229,8 +249,18 @@ export const translations: Record<Language, Translations> = {
     },
     // Error Messages
     error: {
-      auditError: 'Audit Error',
+      auditError: 'We couldn\'t access this website',
       auditFailed: 'Something went wrong during the audit process.',
+      websiteNotAccessible: 'The website is not available or we couldn\'t access it',
+      websiteNotFound: 'This website doesn\'t exist or doesn\'t allow automated access',
+      tryDifferentSite: 'You can try a different site or verify the URL is correct',
+      possibleReasons: 'Possible reasons:',
+      reasons: {
+        blocked: 'The website blocks automated access (common on Facebook, LinkedIn)',
+        noInternet: 'The website is not available at this time',
+        invalidUrl: 'The URL is invalid or has typos',
+        siteDown: 'The server is down or under maintenance',
+      },
     },
     // Log Messages
     logs: {

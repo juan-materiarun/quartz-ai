@@ -12,18 +12,18 @@ export function ThemeSelector() {
       onClick={toggleTheme}
       variant="ghost"
       size="sm"
-      className="h-9 px-3 text-sm text-[#475569] hover:text-[#0f172a] hover:bg-[#f1f5f9] dark:text-[#94a3b8] dark:hover:text-white dark:hover:bg-[#1e293b] transition-all duration-300"
+      className="h-9 px-2 sm:px-3 text-sm text-[#475569] hover:text-[#0f172a] hover:bg-[#f1f5f9] dark:text-[#94a3b8] dark:hover:text-white dark:hover:bg-[#1e293b] transition-all duration-300"
       title={theme === 'dark' ? 'Switch to Light Theme' : 'Cambiar a Tema Oscuro'}
     >
       {theme === 'dark' ? (
         <>
-          <Sun className="h-4 w-4 mr-2" />
-          <span>Light</span>
+          <Sun className="h-4 w-4 sm:mr-2" />
+          <span className="hidden sm:inline">Light</span>
         </>
       ) : (
         <>
-          <Moon className="h-4 w-4 mr-2" />
-          <span>Dark</span>
+          <Moon className="h-4 w-4 sm:mr-2" />
+          <span className="hidden sm:inline">Dark</span>
         </>
       )}
     </Button>

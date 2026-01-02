@@ -140,27 +140,27 @@ export function ProcessingState({ progress, logs }: ProcessingStateProps) {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto space-y-6 px-6 animate-in fade-in duration-300">
+    <div className="w-full max-w-5xl mx-auto space-y-4 sm:space-y-6 px-4 sm:px-6 animate-in fade-in duration-300">
       {/* Status Board */}
-      <div className="glass-card rounded-lg p-6 animate-slide-up-spring">
-        <div className="space-y-6">
+      <div className="glass-card rounded-lg p-4 sm:p-6 animate-slide-up-spring">
+        <div className="space-y-4 sm:space-y-6">
           {/* Header */}
-          <div className="text-center space-y-1 border-b border-[#cbd5e1] dark:border-[#334155] pb-4">
-            <h2 className="text-xl font-semibold text-[#0f172a] dark:text-white">Security Dashboard</h2>
-            <p className="text-sm text-[#334155] dark:text-[#94a3b8]">Multi-Agent Analysis in Progress</p>
+          <div className="text-center space-y-1 border-b border-[#cbd5e1] dark:border-[#334155] pb-3 sm:pb-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#0f172a] dark:text-white">Security Dashboard</h2>
+            <p className="text-xs sm:text-sm text-[#334155] dark:text-[#94a3b8]">Multi-Agent Analysis in Progress</p>
           </div>
 
           {/* Progress Bar */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-[#0f172a] dark:text-[#94a3b8]">{t.processing.progress}</span>
-              <span className="text-sm font-semibold text-[#0f172a] dark:text-white">{progress}%</span>
+              <span className="text-xs sm:text-sm font-medium text-[#0f172a] dark:text-[#94a3b8]">{t.processing.progress}</span>
+              <span className="text-xs sm:text-sm font-semibold text-[#0f172a] dark:text-white">{progress}%</span>
             </div>
             <Progress value={progress} className="h-2" />
           </div>
 
           {/* Agent Status Board */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {agents.map((agent) => {
               const Icon = agent.icon
               const isActive = agent.status === 'active'
@@ -169,7 +169,7 @@ export function ProcessingState({ progress, logs }: ProcessingStateProps) {
               return (
                 <div
                   key={agent.id}
-                  className={`flex flex-col items-start p-4 rounded-lg border-2 transition-all duration-300 ${
+                  className={`flex flex-col items-start p-3 sm:p-4 rounded-lg border-2 transition-all duration-300 ${
                     isCompleted
                       ? `${agent.borderColor} ${agent.bgColor} opacity-100`
                       : isActive
@@ -177,15 +177,15 @@ export function ProcessingState({ progress, logs }: ProcessingStateProps) {
                       : 'border-[#cbd5e1] dark:border-[#334155] bg-[#f8fafc]/30 dark:bg-[#1e293b]/30 opacity-50'
                   }`}
                 >
-                  <div className="flex items-center gap-3 w-full mb-2">
+                  <div className="flex items-center gap-2 sm:gap-3 w-full mb-2">
                     {isActive ? (
-                      <Loader2 className={`h-5 w-5 ${agent.color} animate-spin`} />
+                      <Loader2 className={`h-4 w-4 sm:h-5 sm:w-5 ${agent.color} animate-spin`} />
                     ) : isCompleted ? (
-                      <CheckCircle2 className={`h-5 w-5 ${agent.color}`} />
+                      <CheckCircle2 className={`h-4 w-4 sm:h-5 sm:w-5 ${agent.color}`} />
                     ) : (
-                      <Icon className={`h-5 w-5 ${agent.color} opacity-50`} />
+                      <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${agent.color} opacity-50`} />
                     )}
-                    <h3 className={`text-sm font-semibold ${agent.color} dark:text-white`}>
+                    <h3 className={`text-xs sm:text-sm font-semibold ${agent.color} dark:text-white`}>
                       {agent.name}
                     </h3>
                   </div>
@@ -203,34 +203,34 @@ export function ProcessingState({ progress, logs }: ProcessingStateProps) {
           </div>
 
           {/* Console Output */}
-          <div className="space-y-2 border-t border-[#cbd5e1] dark:border-[#334155] pt-4">
+          <div className="space-y-2 border-t border-[#cbd5e1] dark:border-[#334155] pt-3 sm:pt-4">
             <div className="flex items-center gap-2 mb-2">
-              <Terminal className="h-4 w-4 text-[#38bdf8]" />
+              <Terminal className="h-3 w-3 sm:h-4 sm:w-4 text-[#38bdf8]" />
               <h3 className="text-xs font-semibold text-[#0f172a] dark:text-[#94a3b8] uppercase tracking-wide">
                 Agent Console
               </h3>
             </div>
-            <div className="bg-[#0f172a] dark:bg-[#020617] rounded-lg p-4 font-mono text-xs border border-[#334155] min-h-[120px] max-h-[200px] overflow-y-auto scrollbar-thin">
+            <div className="bg-[#0f172a] dark:bg-[#020617] rounded-lg p-3 sm:p-4 font-mono text-xs border border-[#334155] min-h-[120px] max-h-[200px] overflow-y-auto overflow-x-auto scrollbar-thin">
               <div className="space-y-1">
                 {agentMessages.map((msg, index) => {
                   const agent = agents.find(a => a.id === msg.agent)
                   return (
-                    <div key={index} className="flex items-start gap-2 animate-fade-in">
-                      <span className="text-[#64748b] dark:text-[#94a3b8] text-[10px] min-w-[80px]">
+                    <div key={index} className="flex items-start gap-1 sm:gap-2 animate-fade-in">
+                      <span className="text-[#64748b] dark:text-[#94a3b8] text-[9px] sm:text-[10px] min-w-[70px] sm:min-w-[80px] flex-shrink-0">
                         [{new Date(msg.timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: 2 })}]
                       </span>
-                      <span className={`${agent?.color || 'text-[#38bdf8]'} font-medium`}>
+                      <span className={`${agent?.color || 'text-[#38bdf8]'} font-medium text-[10px] sm:text-xs break-words`}>
                         {msg.message}
                       </span>
                     </div>
                   )
                 })}
                 {displayedMessage && (
-                  <div className="flex items-start gap-2">
-                    <span className="text-[#64748b] dark:text-[#94a3b8] text-[10px] min-w-[80px]">
+                  <div className="flex items-start gap-1 sm:gap-2">
+                    <span className="text-[#64748b] dark:text-[#94a3b8] text-[9px] sm:text-[10px] min-w-[70px] sm:min-w-[80px] flex-shrink-0">
                       [{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: 2 })}]
                     </span>
-                    <span className="text-[#38bdf8] font-medium">
+                    <span className="text-[#38bdf8] font-medium text-[10px] sm:text-xs break-words">
                       {displayedMessage}
                       <span className="animate-pulse">▊</span>
                     </span>

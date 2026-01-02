@@ -34,43 +34,43 @@ export function AuditInput({ onUrlSubmit, onCodeSubmit }: AuditInputProps) {
     : !codeInput.trim()
 
   return (
-    <div className="w-full max-w-3xl mx-auto space-y-6 px-6 animate-in fade-in duration-300">
+    <div className="w-full max-w-3xl mx-auto space-y-6 px-4 sm:px-6 animate-in fade-in duration-300">
       {/* Centered Hero Section */}
-      <div className="text-center space-y-2 relative">
+      <div className="text-center space-y-2 relative pt-12 sm:pt-0">
         <div className="absolute top-0 right-0 flex items-center gap-2">
           <ThemeSelector />
           <LanguageSelector />
         </div>
-        <h1 className="text-3xl font-semibold text-[#0f172a] dark:text-white">{t.hero.title}</h1>
-        <p className="text-base text-[#475569] dark:text-[#94a3b8]">
+        <h1 className="text-2xl sm:text-3xl font-semibold text-[#0f172a] dark:text-white px-2">{t.hero.title}</h1>
+        <p className="text-sm sm:text-base text-[#475569] dark:text-[#94a3b8] px-2">
           {t.hero.subtitle}
         </p>
       </div>
 
-      <div className="glass-card rounded-lg p-6 animate-slide-up-spring">
+      <div className="glass-card rounded-lg p-4 sm:p-6 animate-slide-up-spring">
         {/* Tab Selector */}
-        <div className="flex gap-2 mb-6 border-b border-[#cbd5e1] dark:border-[#334155]">
+        <div className="flex gap-1 sm:gap-2 mb-6 border-b border-[#cbd5e1] dark:border-[#334155]">
           <button
             onClick={() => setMode('url')}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 relative ${
+            className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 relative ${
               mode === 'url'
                 ? 'text-[#38bdf8] border-b-2 border-[#38bdf8]'
                 : 'text-[#475569] dark:text-[#94a3b8] hover:text-[#38bdf8]'
             }`}
           >
             <Globe className="h-4 w-4" />
-            <span>{t.auditInput.websiteTab}</span>
+            <span className="hidden xs:inline sm:inline">{t.auditInput.websiteTab}</span>
           </button>
           <button
             onClick={() => setMode('code')}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 relative ${
+            className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 relative ${
               mode === 'code'
                 ? 'text-[#38bdf8] border-b-2 border-[#38bdf8]'
                 : 'text-[#475569] dark:text-[#94a3b8] hover:text-[#38bdf8]'
             }`}
           >
             <FileCode className="h-4 w-4" />
-            <span>{t.auditInput.codeTab}</span>
+            <span className="hidden xs:inline sm:inline">{t.auditInput.codeTab}</span>
           </button>
         </div>
 

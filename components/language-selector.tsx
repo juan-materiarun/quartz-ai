@@ -16,14 +16,15 @@ export function LanguageSelector() {
       onClick={toggleLanguage}
       variant="ghost"
       size="sm"
-      className="h-9 px-3 text-sm text-[#94a3b8] hover:text-white hover:bg-[#1e293b] transition-all duration-300"
+      className="h-9 px-2 sm:px-3 text-sm text-[#94a3b8] hover:text-white hover:bg-[#1e293b] transition-all duration-300"
       title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
     >
-      <Globe className="h-4 w-4 mr-2" />
-      <span className="uppercase font-medium">{language === 'es' ? 'EN' : 'ES'}</span>
+      <Globe className="h-4 w-4 sm:mr-2" />
+      <span className="uppercase font-medium hidden sm:inline">{language === 'es' ? 'EN' : 'ES'}</span>
     </Button>
   )
 }
+
 
 
 
