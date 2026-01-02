@@ -9,6 +9,7 @@ import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Toolti
 import { useLanguage } from '@/lib/language-context'
 import { LanguageSelector } from '@/components/language-selector'
 import { ThemeSelector } from '@/components/theme-selector'
+import { exportToPDF } from '@/lib/pdf-export'
 
 interface ReportGeneratorProps {
   result: AuditResult
@@ -130,10 +131,7 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           <Button 
-            onClick={() => {
-              // TODO: Implement PDF export
-              console.log('Export PDF')
-            }}
+            onClick={() => exportToPDF(result)}
             className="h-10 px-4 text-sm font-medium bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] text-white border-shimmer hover:from-[#38bdf8]/90 hover:to-[#0ea5e9]/90 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg"
           >
             <FileText className="h-4 w-4" />
