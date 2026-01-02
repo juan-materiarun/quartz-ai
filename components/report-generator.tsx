@@ -8,6 +8,7 @@ import type { AuditResult } from '@/types'
 import { useState, useMemo } from 'react'
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { useLanguage } from '@/lib/language-context'
+import { useTheme } from '@/lib/theme-context'
 import { LanguageSelector } from '@/components/language-selector'
 import { ThemeSelector } from '@/components/theme-selector'
 import { exportToPDF } from '@/lib/pdf-export'
@@ -26,6 +27,7 @@ const COLORS = {
 
 export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
   const { t } = useLanguage()
+  const { theme } = useTheme()
   const [copied, setCopied] = useState(false)
   const [scriptExpanded, setScriptExpanded] = useState(false)
 
@@ -122,13 +124,13 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
       <div className="flex flex-col gap-4 py-4 border-b border-[#334155] dark:border-[#334155] border-[#cbd5e1] animate-slide-up-spring">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 flex-1">
-            {/* Logo */}
+            {/* Logo limpio sin efectos - cambia según el tema */}
             <Image 
-              src="/logo.png" 
+              src={theme === 'dark' ? '/logo-blacktheme.png' : '/logo.png'}
               alt="QUARTZ AI" 
-              width={120}
-              height={48}
-              className="h-10 sm:h-12 w-auto object-contain hidden sm:block"
+              width={140}
+              height={56}
+              className="h-12 sm:h-14 w-auto object-contain hidden sm:block"
             />
             <div className="text-left">
               <h1 className="text-xl sm:text-2xl font-semibold text-white dark:text-white text-[#0f172a]">{t.report.title}</h1>

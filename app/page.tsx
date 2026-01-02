@@ -125,8 +125,8 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen relative z-10 p-4 sm:p-6 bg-transparent">
-      <div className="container mx-auto py-4 sm:py-6">
+    <main className="min-h-screen relative z-10 pt-4 sm:pt-6 bg-transparent">
+      <div className="container mx-auto w-full">
         {status === 'idle' && (
           <AuditInput
             onUrlSubmit={handleUrlSubmit}
@@ -135,7 +135,9 @@ export default function Home() {
         )}
 
         {status === 'processing' && (
-          <ProcessingState progress={progress} logs={logs} />
+          <div className="pt-8">
+            <ProcessingState progress={progress} logs={logs} />
+          </div>
         )}
 
         {status === 'completed' && auditResult && (

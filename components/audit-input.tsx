@@ -6,6 +6,7 @@ import { Link, Code, ArrowRight, Globe, FileCode } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { useLanguage } from '@/lib/language-context'
+import { useTheme } from '@/lib/theme-context'
 import { LanguageSelector } from '@/components/language-selector'
 import { ThemeSelector } from '@/components/theme-selector'
 
@@ -18,6 +19,7 @@ type InputMode = 'url' | 'code'
 
 export function AuditInput({ onUrlSubmit, onCodeSubmit }: AuditInputProps) {
   const { t } = useLanguage()
+  const { theme } = useTheme()
   const [mode, setMode] = useState<InputMode>('url')
   const [urlInput, setUrlInput] = useState('')
   const [codeInput, setCodeInput] = useState('')
@@ -35,35 +37,32 @@ export function AuditInput({ onUrlSubmit, onCodeSubmit }: AuditInputProps) {
     : !codeInput.trim()
 
   return (
-    <div className="w-full max-w-3xl mx-auto space-y-6 px-4 sm:px-6 animate-in fade-in duration-300">
+    <div className="w-full max-w-3xl mx-auto space-y-3 px-4 sm:px-6 animate-in fade-in duration-300">
       {/* Centered Hero Section */}
-      <div className="text-center space-y-3 relative pt-12 sm:pt-0">
+      <div className="text-center space-y-2 relative">
         <div className="absolute top-0 right-0 flex items-center gap-2">
           <ThemeSelector />
           <LanguageSelector />
         </div>
         
-        {/* Logo */}
-        <div className="flex justify-center mb-2">
-          <Image 
-            src="/logo.png" 
-            alt="QUARTZ AI" 
-            width={200}
-            height={80}
-            priority
-            className="h-16 sm:h-20 w-auto object-contain"
-          />
+        {/* Logo - Limpio sin efectos */}
+        <div className="flex justify-center items-center -mb-2">
+          <div className="w-56 sm:w-64 flex justify-center">
+            <Image 
+              src={theme === 'dark' ? '/logo-blacktheme.png' : '/logo.png'}
+              alt="QUARTZ AI - Bank-Grade Testing Automation" 
+              width={256}
+              height={103}
+              priority
+              className="w-full h-auto object-contain mx-auto"
+            />
+          </div>
         </div>
-        
-        <h1 className="text-2xl sm:text-3xl font-semibold text-[#0f172a] dark:text-white px-2">{t.hero.title}</h1>
-        <p className="text-sm sm:text-base text-[#475569] dark:text-[#94a3b8] px-2">
-          {t.hero.subtitle}
-        </p>
       </div>
 
-      <div className="glass-card rounded-lg p-4 sm:p-6 animate-slide-up-spring">
+      <div className="glass-card rounded-lg p-3 sm:p-5 animate-slide-up-spring">
         {/* Tab Selector */}
-        <div className="flex gap-1 sm:gap-2 mb-6 border-b border-[#cbd5e1] dark:border-[#334155]">
+        <div className="flex gap-1 sm:gap-2 mb-4 border-b border-[#cbd5e1] dark:border-[#334155]">
           <button
             onClick={() => setMode('url')}
             className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 relative ${
@@ -130,7 +129,7 @@ export function AuditInput({ onUrlSubmit, onCodeSubmit }: AuditInputProps) {
         )}
 
         {/* Submit Button */}
-        <div className="mt-6 pt-4 border-t border-[#cbd5e1] dark:border-[#334155]">
+        <div className="mt-4 pt-3 border-t border-[#cbd5e1] dark:border-[#334155]">
           <Button
             onClick={handleSubmit}
             disabled={isSubmitDisabled}
