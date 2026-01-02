@@ -38,6 +38,9 @@ export interface Translations {
   report: {
     title: string
     subtitle: string
+    executiveSummary: string
+    severity: string
+    businessImpact: string
     stats: {
       passed: string
       defects: string
@@ -129,6 +132,9 @@ export const translations: Record<Language, Translations> = {
     report: {
       title: 'Reporte de Auditoría',
       subtitle: 'Análisis de Calidad de Nivel Bancario',
+      executiveSummary: 'Resumen Ejecutivo: Impacto de Negocio',
+      severity: 'Severidad',
+      businessImpact: 'Impacto de Negocio',
       stats: {
         passed: 'Exitosas',
         defects: 'Defectos',
@@ -220,6 +226,9 @@ export const translations: Record<Language, Translations> = {
     report: {
       title: 'Audit Report',
       subtitle: 'Bank-Grade Quality Analysis',
+      executiveSummary: 'Executive Summary: Business Impact',
+      severity: 'Severity',
+      businessImpact: 'Business Impact',
       stats: {
         passed: 'Passed',
         defects: 'Defects',

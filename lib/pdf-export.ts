@@ -99,6 +99,43 @@ export function exportToPDF(result: AuditResult, url: string = '') {
   
   yPosition = boxY + boxHeight + 15;
 
+  // ========== EXECUTIVE SUMMARY - BUSINESS IMPACT ==========
+  if (result.business_impact) {
+    doc.setFillColor(56, 189, 248, 0.1);
+    doc.roundedRect(15, yPosition, pageWidth - 30, 0, 3, 3, 'F');
+    
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(56, 189, 248);
+    doc.text('EXECUTIVE SUMMARY: BUSINESS IMPACT', 20, yPosition + 8);
+    
+    if (result.severity_score) {
+      const scoreColor = result.severity_score >= 80 ? [239, 68, 68] : result.severity_score >= 50 ? [245, 158, 11] : [16, 185, 129];
+      doc.setFontSize(20);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(scoreColor[0], scoreColor[1], scoreColor[2]);
+      doc.text(`${result.severity_score}/100`, pageWidth - 25, yPosition + 12, { align: 'right' });
+      
+      doc.setFontSize(8);
+      doc.setTextColor(100, 116, 139);
+      doc.text('Severity Score', pageWidth - 25, yPosition + 18, { align: 'right' });
+    }
+    
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(71, 85, 105);
+    
+    const impactLines = doc.splitTextToSize(result.business_impact, pageWidth - 50);
+    doc.text(impactLines, 20, yPosition + 20);
+    
+    const impactHeight = impactLines.length * 5 + 25;
+    doc.setDrawColor(56, 189, 248);
+    doc.setLineWidth(2);
+    doc.line(15, yPosition, 15, yPosition + impactHeight);
+    
+    yPosition += impactHeight + 10;
+  }
+
   // ========== DEFECTS TABLE ==========
   if (result.defects.length > 0) {
     doc.setFontSize(14);
@@ -107,13 +144,21 @@ export function exportToPDF(result: AuditResult, url: string = '') {
     doc.text('Defects Found', 15, yPosition);
     yPosition += 8;
 
-    const defectsData = result.defects.map((defect) => [
-      defect.id,
-      defect.priority,
-      defect.category,
-      defect.title,
-      defect.description.substring(0, 100) + (defect.description.length > 100 ? '...' : ''),
-    ]);
+    const defectsData = result.defects.map((defect) => {
+      let descriptionText = defect.description.substring(0, 80) + (defect.description.length > 80 ? '...' : '');
+      
+      if (defect.impact_translation) {
+        descriptionText += `\n\n💼 Business Impact: ${defect.impact_translation.substring(0, 100)}${defect.impact_translation.length > 100 ? '...' : ''}`;
+      }
+      
+      return [
+        defect.id,
+        defect.priority,
+        defect.category,
+        defect.title,
+        descriptionText,
+      ];
+    });
 
     autoTable(doc, {
       startY: yPosition,

@@ -120,7 +120,7 @@ export function AuditInput({ onUrlSubmit, onCodeSubmit }: AuditInputProps) {
               onChange={(e) => setCodeInput(e.target.value)}
               placeholder={t.auditInput.codePlaceholder}
               rows={10}
-              className="input-focus-glow flex w-full rounded-lg border border-[#334155] dark:border-[#334155] light:border-[#e2e8f0] bg-[#1e293b] dark:bg-[#1e293b] light:bg-white px-4 py-2.5 text-sm font-mono text-white dark:text-white light:text-[#0f172a] placeholder:text-[#94a3b8] dark:placeholder:text-[#94a3b8] light:placeholder:text-[#64748b] focus:outline-none focus:border-[#38bdf8] transition-all duration-300 resize-none"
+              className="input-focus-glow flex w-full rounded-lg border border-[#e2e8f0] dark:border-[#334155] bg-white dark:bg-[#1e293b] px-4 py-2.5 text-sm font-mono text-[#0f172a] dark:text-white placeholder:text-[#64748b] dark:placeholder:text-[#94a3b8] focus:outline-none focus:border-[#38bdf8] transition-all duration-300 resize-none"
             />
             <p className="text-xs text-[#94a3b8] dark:text-[#94a3b8] light:text-[#64748b]">
               {t.auditInput.codeDescription}
@@ -133,7 +133,7 @@ export function AuditInput({ onUrlSubmit, onCodeSubmit }: AuditInputProps) {
           <Button
             onClick={handleSubmit}
             disabled={isSubmitDisabled}
-            className="w-full h-11 text-sm font-medium bg-[#38bdf8] text-white dark:text-[#020617] hover:bg-[#38bdf8]/90 hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+            className="w-full h-11 text-sm font-medium bg-[#38bdf8] text-[#020617] hover:bg-[#38bdf8]/90 hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
           >
             <span>{t.auditInput.startAudit}</span>
             <ArrowRight className="ml-2 h-4 w-4" />

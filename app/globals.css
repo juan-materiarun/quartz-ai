@@ -100,6 +100,7 @@
     pointer-events: none;
     z-index: 0;
     transition: opacity 0.3s ease;
+    animation: gridPulse 4s ease-in-out infinite;
   }
 
   /* Dark theme grid */
@@ -116,6 +117,64 @@
       linear-gradient(rgba(100, 116, 139, 0.1) 1px, transparent 1px),
       linear-gradient(90deg, rgba(100, 116, 139, 0.1) 1px, transparent 1px);
     background-size: 50px 50px;
+  }
+
+  /* Animated dots */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: 
+      radial-gradient(circle, rgba(56, 189, 248, 0.6) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0;
+    animation: dotTravel 8s linear infinite;
+  }
+
+  .dark body::after {
+    background-image: 
+      radial-gradient(circle, rgba(56, 189, 248, 0.8) 2px, transparent 2px);
+  }
+
+  .light body::after {
+    background-image: 
+      radial-gradient(circle, rgba(100, 116, 139, 0.6) 2px, transparent 2px);
+  }
+
+  @keyframes gridPulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes dotTravel {
+    0% {
+      background-position: 0 0;
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.3;
+    }
+    50% {
+      background-position: 50px 50px;
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      background-position: 100px 100px;
+      opacity: 0;
+    }
   }
   
   h1, h2, h3, h4, h5, h6 {

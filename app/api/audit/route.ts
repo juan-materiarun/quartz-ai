@@ -230,56 +230,135 @@ export async function POST(request: NextRequest) {
       try {
         const model = genAI.getGenerativeModel({ model: modelName });
         
-        const prompt = `Analizá el siguiente ${contentType} y encontrá errores. Si el contenido está vacío, no inventes nada.
+        const prompt = `Sos un Consultor Senior de Infraestructura Digital realizando una auditoría privada de nivel enterprise.
 
-CONTENIDO REAL DE LA WEB:
+CONTENIDO REAL DE LA INFRAESTRUCTURA:
 ${contentToAnalyze.substring(0, 100000)} ${contentToAnalyze.length > 100000 ? '\n\n[... contenido truncado por longitud ...]' : ''}
 
-INSTRUCCIÓN ESTRICTA: Este es contenido REAL obtenido directamente de la web mediante scraping. Analizá SOLO lo que está presente en el contenido proporcionado arriba. Si el contenido está vacío o no hay suficiente información, NO inventes datos. En su lugar, devolvé un mensaje de error en el campo de respuesta indicando que no se encontró información suficiente para analizar.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSTRUCCIÓN CRÍTICA DE VALIDACIÓN:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-IMPORTANTE: NO te enfoques en estructura HTML/DOM simple. Enfócate en VULNERABILIDADES CRÍTICAS y FRICCIÓN DE NEGOCIO basándote SOLO en el contenido real proporcionado.
+Este contenido fue extraído mediante scraping real. Analizá ÚNICAMENTE lo que está presente arriba.
 
-Busca específicamente en el contenido REAL proporcionado:
+Si el contenido está vacío o no hay suficiente información técnica: devolvé un error en el campo "error" del JSON indicando que la auditoría no pudo completarse por falta de información.
 
-1. LÓGICA EXPUESTA:
-   - Claves API, tokens o credenciales hardcodeadas en el código
-   - Endpoints sensibles expuestos públicamente
-   - Comentarios que revelen información confidencial o lógica de negocio
-   - Variables de entorno o configuraciones sensibles en el frontend
+NO inventes hallazgos. NO asumas tecnologías que no ves. NO especules sobre infraestructura oculta.
 
-2. FALLOS DE SEGURIDAD:
-   - Formularios sin protección CSRF (tokens faltantes)
-   - Librerías desactualizadas con vulnerabilidades conocidas
-   - Puntos de entrada potenciales para XSS (innerHTML sin sanitizar, eval(), etc.)
-   - Autenticación débil o validación insuficiente
-   - Exposición de datos sensibles en respuestas de API
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ESTÁNDAR DE ANÁLISIS (MATERIA.RUN GRADE):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-3. CONVERSION KILLERS (UX que hace que los usuarios abandonen):
-   - Botones críticos (checkout, registro) ocultos detrás de popups o elementos superpuestos
-   - Menús móviles que no se cierran correctamente
-   - Formularios que bloquean el flujo de conversión
-   - Elementos interactivos inaccesibles o rotos
-   - Carga lenta o bloqueos que impiden acciones del usuario
+Esto NO es un validador HTML gratuito. Es una auditoría de infraestructura crítica orientada a ROI.
 
-4. ERRORES DE LÓGICA:
-   - Posibilidad de bypasear login o autenticación
-   - Acceso no autorizado a datos privados
-   - Validaciones del lado del cliente que pueden ser manipuladas
-   - Rutas o permisos mal configurados
-   - Lógica de negocio que puede ser explotada
+ÁREAS DE ANÁLISIS (Basándote SOLO en el contenido real extraído):
 
-Responde EXCLUSIVAMENTE con un objeto JSON que contenga:
-- "passedTests": array de objetos con {category: string, test: string, status: "passed"}
-- "defects": array de objetos con {id: string, category: string, title: string, description: string, priority: "Critical"|"Medium"|"Low", location?: string}
-- "testScript": string con un script de prueba automatizado para verificar los defectos encontrados
-- "error": string (solo si el contenido está vacío o no hay suficiente información para analizar - en este caso, este campo debe contener el mensaje de error y los demás campos pueden estar vacíos)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CATEGORÍA 1: SEGURIDAD Y CONFIANZA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-IMPORTANTE: 
-- No escribas nada más que el JSON.
-- Analizá SOLO el contenido real proporcionado arriba.
-- Si el contenido está vacío o no hay suficiente información, devolvé un error en lugar de inventar datos.
-- Prioriza defectos "Critical" para vulnerabilidades de seguridad y lógica expuesta.
-- Solo reportá defectos que puedas identificar claramente en el contenido proporcionado.`;
+Identificá vulnerabilidades que comprometan la confianza del cliente o expongan la infraestructura:
+- Claves API, tokens o credenciales expuestas en el código fuente
+- Endpoints de administración accesibles públicamente
+- Falta de protección CSRF en formularios críticos (checkout, login, registro)
+- Librerías desactualizadas con CVEs conocidos
+- Vectores de XSS (innerHTML sin sanitizar, eval() expuesto)
+- Validaciones del lado del cliente que pueden manipularse
+- Falta de certificados SSL/TLS o configuración débil
+- Comentarios HTML que revelan lógica de negocio confidencial
+
+IMPACTO DE NEGOCIO: Pérdida de confianza del cliente, exposición a fraudes, posibles multas GDPR/PCI DSS, daño reputacional irreversible.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CATEGORÍA 2: RENDIMIENTO Y CONVERSIÓN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Detectá fricciones que hagan que los usuarios abandonen antes de convertir:
+- Imágenes sin atributo 'alt' (pérdida de tráfico SEO + exclusión de usuarios con discapacidad visual)
+- Botones críticos (CTA, checkout) ocultos o inaccesibles
+- Menús móviles rotos o que no se cierran
+- Formularios con validación confusa o campos innecesarios
+- Carga lenta de recursos críticos (CSS/JS bloqueantes)
+- Falta de meta tags para redes sociales (pérdida de viralidad orgánica)
+- Enlaces rotos que llevan a 404
+- Texto ilegible por contraste bajo
+
+IMPACTO DE NEGOCIO: Aumento de tasa de rebote, pérdida de conversiones cualificadas, caída en rankings de búsqueda, exclusión de segmentos de mercado.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CATEGORÍA 3: ARQUITECTURA TÉCNICA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Evaluá la calidad técnica y escalabilidad de la infraestructura:
+- Tags HTML mal cerrados o anidamiento incorrecto
+- Scripts y estilos en línea que bloquean el rendering
+- Falta de lazy loading en imágenes pesadas
+- Requests HTTP innecesarios o duplicados
+- Ausencia de Service Workers o estrategias de caché
+- Código jQuery legacy mezclado con frameworks modernos
+- Dependencias con versiones conflictivas
+
+IMPACTO DE NEGOCIO: Costos de mantenimiento elevados, dificultad para escalar, deuda técnica que limita innovación, tiempos de desarrollo más largos.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FORMATO DE RESPUESTA (JSON ESTRUCTURADO):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Devolvé ÚNICAMENTE un objeto JSON con esta estructura exacta:
+
+{
+  "business_impact": "Resumen ejecutivo de 2 frases sobre cómo estos hallazgos afectan directamente el ROI, la conversión o la confianza del cliente. Ejemplo: 'La exposición de credenciales API pone en riesgo la integridad de los datos de clientes y podría resultar en multas regulatorias. Los conversion killers detectados están causando una pérdida estimada del 23% en el embudo de ventas.'",
+  
+  "severity_score": 85,  // Número del 1-100 basado en gravedad técnica + impacto de negocio combinado
+  
+  "passedTests": [
+    {
+      "category": "Seguridad y Confianza" | "Rendimiento y Conversión" | "Arquitectura Técnica",
+      "test": "Descripción de la validación que pasó correctamente",
+      "status": "passed"
+    }
+  ],
+  
+  "defects": [
+    {
+      "id": "SEC-001",  // Formato: SEC (Seguridad), CONV (Conversión), ARCH (Arquitectura)
+      "category": "Seguridad y Confianza" | "Rendimiento y Conversión" | "Arquitectura Técnica",
+      "title": "Título técnico preciso del defecto",
+      "description": "Descripción técnica detallada del hallazgo",
+      "priority": "Critical" | "Medium" | "Low",
+      "location": "URL, línea de código o componente específico (si es identificable)",
+      "impact_translation": "TRADUCCIÓN AL LENGUAJE DE NEGOCIO: Cómo este error técnico impacta directamente en ingresos, conversión o confianza. Ejemplos: 'Pérdida de tráfico orgánico (SEO) y exclusión de usuarios con discapacidad visual' | 'Aumento en la tasa de rebote; los clientes abandonan antes de ver la oferta' | 'Riesgo de fraude y pérdida de confianza del cliente, resultando en daño reputacional'"
+    }
+  ],
+  
+  "testScript": "Script de testing automatizado para validar los defectos encontrados (Playwright, Cypress o cURL)",
+  
+  "error": null  // Solo si el contenido está vacío o no hay información suficiente. En ese caso, este campo contiene el mensaje de error y los demás pueden estar vacíos
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TONO DE VOZ (MATERIA.RUN STYLE):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Profesional, directo, autoritario.
+- Sin fluff técnico innecesario.
+- Cada hallazgo debe tener un "bridge" claro entre el error técnico y el impacto de negocio.
+- No uses frases como "podría mejorar" o "se recomienda". Usá: "Está causando", "Resultará en", "Exponiendo a".
+- Hablá como un consultor senior que cobra $15k/mes, no como un validador HTML gratuito.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGLAS FINALES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. NO escribas nada fuera del JSON.
+2. Analizá ÚNICAMENTE el contenido real extraído arriba.
+3. Si el contenido está vacío: devolvé {"error": "Contenido insuficiente para auditoría", ...campos vacíos}.
+4. Prioriza defectos "Critical" para vulnerabilidades que afecten seguridad o conversión directamente.
+5. CADA defecto DEBE tener su "impact_translation" explicando el impacto de negocio en términos claros.
+6. Los IDs deben seguir el formato: SEC-001, CONV-002, ARCH-003 según la categoría.
+7. El severity_score debe considerar tanto gravedad técnica como impacto económico.
+
+Generá el JSON ahora:`;
 
         const result = await model.generateContent(prompt);
         text = result.response.text();

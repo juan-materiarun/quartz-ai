@@ -215,7 +215,7 @@ export default function Home() {
               <div className="flex justify-center">
                 <Button
                   onClick={handleReset}
-                  className="h-11 px-8 text-sm font-medium bg-[#38bdf8] text-white dark:text-[#020617] hover:bg-[#38bdf8]/90 hover:glow-cyan transition-all duration-300"
+                  className="h-11 px-8 text-sm font-medium bg-[#38bdf8] text-[#020617] hover:bg-[#38bdf8]/90 hover:glow-cyan transition-all duration-300"
                 >
                   {t.common.tryAgain}
                 </Button>

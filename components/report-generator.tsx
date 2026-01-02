@@ -133,7 +133,7 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
               className="h-12 sm:h-14 w-auto object-contain hidden sm:block"
             />
             <div className="text-left">
-              <h1 className="text-xl sm:text-2xl font-semibold text-white dark:text-white text-[#0f172a]">{t.report.title}</h1>
+              <h1 className="text-xl sm:text-2xl font-semibold text-[#0f172a] dark:text-white">{t.report.title}</h1>
               <p className="text-sm sm:text-base text-[#94a3b8] dark:text-[#94a3b8] text-[#475569]">{t.report.subtitle}</p>
             </div>
           </div>
@@ -152,12 +152,41 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
           </Button>
           <Button 
             onClick={onReset} 
-            className="h-10 px-6 text-sm font-medium bg-[#38bdf8] text-[#020617] dark:text-[#020617] text-white hover:bg-[#38bdf8]/90 hover:glow-cyan transition-all duration-300"
+            className="h-10 px-6 text-sm font-medium bg-[#38bdf8] text-[#020617] hover:bg-[#38bdf8]/90 hover:glow-cyan transition-all duration-300"
           >
             {t.common.newAudit}
           </Button>
         </div>
       </div>
+
+      {/* Executive Summary - Business Impact */}
+      {result.business_impact && (
+        <div className="glass-card rounded-lg p-6 border-l-4 border-[#38bdf8] animate-slide-up-spring">
+          <div className="flex items-start gap-4">
+            <div className="flex-1">
+              <h3 className="text-sm font-semibold text-[#0f172a] dark:text-white mb-2 uppercase tracking-wide">
+                📊 {t.report.executiveSummary}
+              </h3>
+              <p className="text-base text-[#475569] dark:text-[#94a3b8] leading-relaxed">
+                {result.business_impact}
+              </p>
+            </div>
+            {result.severity_score && (
+              <div className="flex flex-col items-center bg-gradient-to-br from-[#ef4444]/10 to-[#f59e0b]/10 rounded-lg p-4 min-w-[100px]">
+                <span className="text-xs text-[#64748b] dark:text-[#94a3b8] mb-1">{t.report.severity}</span>
+                <span className={`text-3xl font-bold ${
+                  result.severity_score >= 80 ? 'text-[#ef4444]' : 
+                  result.severity_score >= 50 ? 'text-[#f59e0b]' : 
+                  'text-[#10b981]'
+                }`}>
+                  {result.severity_score}
+                </span>
+                <span className="text-xs text-[#64748b] dark:text-[#94a3b8]">/100</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Stats Row */}
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 animate-slide-up-spring">
@@ -184,7 +213,7 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
         {/* Pie Chart */}
         {priorityData.length > 0 && (
           <div className="glass-card p-4 rounded-lg">
-            <h3 className="text-sm font-semibold text-white dark:text-white text-[#0f172a] mb-3">{t.report.charts.byPriority}</h3>
+            <h3 className="text-sm font-semibold text-[#0f172a] dark:text-white mb-3">{t.report.charts.byPriority}</h3>
             <ResponsiveContainer width="100%" height={180}>
               <PieChart>
                 <Pie
@@ -219,7 +248,7 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
         {/* Health Score */}
         <div className="glass-card p-4 rounded-lg flex items-center justify-center">
           <div className="text-center">
-            <h3 className="text-sm font-semibold text-white dark:text-white text-[#0f172a] mb-2">{t.report.charts.generalHealth}</h3>
+            <h3 className="text-sm font-semibold text-[#0f172a] dark:text-white mb-2">{t.report.charts.generalHealth}</h3>
             <div className={`text-4xl sm:text-5xl font-semibold ${getScoreColor(overallScore)} mb-1`}>
               {overallScore}
             </div>
@@ -229,7 +258,7 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
 
         {/* Passed Tests - Compact List */}
         <div className="glass-card p-4 rounded-lg md:col-span-2 lg:col-span-1">
-          <h3 className="text-sm font-semibold text-white dark:text-white text-[#0f172a] mb-3 flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-[#0f172a] dark:text-white mb-3 flex items-center gap-2">
             {t.report.charts.passedTests}
             <span className="ml-auto text-xs font-normal text-[#94a3b8] dark:text-[#94a3b8] text-[#475569]">
               {stats.totalPassed}
@@ -244,7 +273,7 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
                 >
                   <CheckCircle2 className="h-4 w-4 text-[#10b981] mt-0.5 flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs sm:text-sm font-medium text-white dark:text-white text-[#0f172a]">{test.category}</p>
+                    <p className="text-xs sm:text-sm font-medium text-[#0f172a] dark:text-white">{test.category}</p>
                     <p className="text-xs text-[#94a3b8] dark:text-[#94a3b8] text-[#475569] mt-0.5">{test.test}</p>
                   </div>
                 </div>
@@ -259,7 +288,7 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
       {/* Bar Chart Section */}
       {categoryData.length > 0 && (
         <div className="border-b border-[#334155] pb-6 animate-slide-up-spring">
-          <h3 className="text-sm font-semibold text-white dark:text-white text-[#0f172a] mb-3">{t.report.charts.defectsByCategory}</h3>
+          <h3 className="text-sm font-semibold text-[#0f172a] dark:text-white mb-3">{t.report.charts.defectsByCategory}</h3>
           <div className="glass-card p-3 sm:p-4 rounded-lg overflow-x-auto">
             <ResponsiveContainer width="100%" height={200} minWidth={300}>
               <BarChart data={categoryData}>
@@ -299,7 +328,7 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
       {/* Defects Section */}
       <div className="space-y-3 sm:space-y-4 animate-slide-up-spring">
         <div className="flex items-center justify-between border-b border-[#334155] dark:border-[#334155] border-[#cbd5e1] pb-2">
-          <h2 className="text-base sm:text-lg font-semibold text-white dark:text-white text-[#0f172a] flex items-center gap-2">
+          <h2 className="text-base sm:text-lg font-semibold text-[#0f172a] dark:text-white flex items-center gap-2">
             {t.report.defects.title}
           </h2>
           <span className="text-xs sm:text-sm text-[#94a3b8] dark:text-[#94a3b8] text-[#475569]">
@@ -342,10 +371,19 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
                         {defect.category}
                       </span>
                     </div>
-                    <h3 className="text-sm font-semibold text-white dark:text-white text-[#0f172a] mb-1 break-words">{defect.title}</h3>
-                    <p className="text-xs sm:text-sm text-[#94a3b8] dark:text-[#94a3b8] text-[#475569] leading-relaxed break-words">{defect.description}</p>
+                    <h3 className="text-sm font-semibold text-[#0f172a] dark:text-white mb-1 break-words">{defect.title}</h3>
+                    <p className="text-xs sm:text-sm text-[#94a3b8] dark:text-[#94a3b8] text-[#475569] leading-relaxed break-words mb-2">{defect.description}</p>
+                    
+                    {/* Business Impact Translation */}
+                    {defect.impact_translation && (
+                      <div className="bg-gradient-to-r from-[#38bdf8]/10 to-[#0ea5e9]/10 dark:from-[#38bdf8]/20 dark:to-[#0ea5e9]/20 border-l-2 border-[#38bdf8] rounded px-3 py-2 mt-3">
+                        <p className="text-xs font-medium text-[#0f172a] dark:text-white mb-1">💼 {t.report.businessImpact}:</p>
+                        <p className="text-xs text-[#475569] dark:text-[#94a3b8] leading-relaxed">{defect.impact_translation}</p>
+                      </div>
+                    )}
+                    
                     {defect.location && (
-                      <p className="font-mono text-xs text-[#94a3b8] dark:text-[#94a3b8] text-[#475569] mt-2 break-all">{defect.location}</p>
+                      <p className="font-mono text-xs text-[#94a3b8] dark:text-[#94a3b8] text-[#475569] mt-2 break-all">📍 {defect.location}</p>
                     )}
                   </div>
                 </div>
@@ -363,7 +401,7 @@ export function ReportGenerator({ result, onReset }: ReportGeneratorProps) {
       {/* Test Script - Cyber Code Block */}
       <div className="border-t border-[#334155] dark:border-[#334155] border-[#cbd5e1] pt-6 animate-slide-up-spring">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-3">
-          <h3 className="text-base sm:text-lg font-semibold text-white dark:text-white text-[#0f172a]">{t.report.testScript}</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-[#0f172a] dark:text-white">{t.report.testScript}</h3>
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <Button
               variant="ghost"
